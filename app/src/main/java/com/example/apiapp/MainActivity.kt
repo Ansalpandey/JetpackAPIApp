@@ -43,6 +43,7 @@ import com.example.apiapp.data.ProductsRepositoryImpl
 import com.example.apiapp.data.model.Product
 import com.example.apiapp.presentation.ProductsViewModel
 import com.example.apiapp.ui.theme.APIAppTheme
+import com.example.apiapp.ui.theme.Black500
 import kotlinx.coroutines.flow.collectLatest
 
 @Suppress("UNCHECKED_CAST")
@@ -75,7 +76,7 @@ class MainActivity : ComponentActivity() {
 
           if (productList.isEmpty()) {
             Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-              CircularProgressIndicator()
+              CircularProgressIndicator(color = Color.White)
             }
           } else {
             LazyColumn(
@@ -109,11 +110,11 @@ fun Product(product: Product) {
 
   Column(
     modifier =
-      Modifier.clip(RoundedCornerShape(12.dp)).height(300.dp).fillMaxWidth().background(Color.Black)
+      Modifier.clip(RoundedCornerShape(12.dp)).height(310.dp).fillMaxWidth().background(Black500)
   ) {
     if (imageState is AsyncImagePainter.State.Error) {
-      Box(modifier = Modifier.fillMaxWidth().height(200.dp), contentAlignment = Alignment.Center) {
-        CircularProgressIndicator()
+      Box(modifier = Modifier.fillMaxWidth().height(310.dp), contentAlignment = Alignment.Center) {
+        CircularProgressIndicator(color = Color.White)
       }
     }
 
@@ -132,6 +133,7 @@ fun Product(product: Product) {
       modifier = Modifier.padding(horizontal = 16.dp),
       text = "${product.title} -- Price: ${product.price}$",
       fontSize = 18.sp,
+      color = Color.White,
       fontWeight = FontWeight.SemiBold
     )
 
@@ -139,8 +141,10 @@ fun Product(product: Product) {
 
     Text(
       modifier = Modifier.padding(horizontal = 16.dp),
-      text = product.description + product.category,
-      fontSize = 13.sp,
+      text = product.description,
+      maxLines = 4,
+      color = Color.Gray,
+      fontSize = 16.sp,
     )
   }
 }
